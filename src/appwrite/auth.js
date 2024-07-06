@@ -7,8 +7,8 @@ export class AuthService {
 
     constructor() {
         this.client
-            .setEndpoint(appwriteUrl)
-            .setProject(appwriteProjectId);
+            .setEndpoint(conf.appwriteUrl)
+            .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client)
     }
 
@@ -33,12 +33,13 @@ export class AuthService {
         }
     }
 
-    async currentSession() {
+    async getCurrentUser() {
         try {
             return await this.account.get()
         } catch (error) {
             console.log(`Error in current Session ::`, error)
         }
+        return null
     }
 
     async logout() {
