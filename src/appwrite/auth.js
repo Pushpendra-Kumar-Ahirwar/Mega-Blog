@@ -9,47 +9,51 @@ export class AuthService {
         this.client
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
-        this.account = new Account(this.client)
+        this.account = new Account(this.client);
     }
 
     async createAccount({ email, password, name }) {
         try {
-            const UserAccount = this.account.create(ID.unique, email, password, name)
+            const UserAccount = await this.account.create(
+                ID.unique,
+                email,
+                password,
+                name
+            );
             if (UserAccount) {
-                return this.login({ email, password })
+                return this.login({ email, password });
             } else {
-                return UserAccount
+                return UserAccount;
             }
         } catch (error) {
-            throw error;
+            console.log("Authservice: CreateAccount: ", error);
         }
     }
 
     async login({ email, password }) {
         try {
-            return await this.account.createEmailPasswordSession(email, password)
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
-            throw error
+            console.log("AuthService: Login: ", error);
         }
     }
 
     async getCurrentUser() {
         try {
-            return await this.account.get()
+            return await this.account.get();
         } catch (error) {
-            console.log(`Error in current Session ::`, error)
+            console.log(`Error in current Session ::`, error);
         }
-        return null
+        return null;
     }
 
     async logout() {
         try {
-            await this.account.deleteSessions()
+            await this.account.deleteSessions();
         } catch (error) {
-            console.log("Error in log out", error)
+            console.log("Error in logout", error);
         }
     }
-
 }
 
 const authService = new AuthService();
