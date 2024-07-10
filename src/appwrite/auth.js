@@ -47,6 +47,7 @@ export class AuthService {
             console.error("Error in current session:", error);
             throw error;
         }
+        return null;
     }
 
     async logout() {
