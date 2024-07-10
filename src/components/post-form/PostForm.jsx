@@ -17,7 +17,7 @@ function PostForm({ post }) {
         });
 
     const navigate = useNavigate();
-    const useData = useSelector((state) => state.auth.userData);
+    const userData = useSelector((state) => state.auth.userData);
 
     const sumbit = async (data) => {
         if (post) {
@@ -33,7 +33,7 @@ function PostForm({ post }) {
                 featuredImage: file ? file.$id : undefined,
             });
             if (dbPost) {
-                navigate(`/post/${dpPost.$id}`);
+                navigate(`/post/${dbPost.$id}`);
             }
         } else {
             const file = await appwriteService.uploadFile(data.image[0]);
