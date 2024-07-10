@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, logoutBtn, Logo } from '../index'
+import { Container, LogoutButton, Logo } from '../index'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -26,6 +26,11 @@ function Header() {
     {
       name: "All Posts",
       slug: '/all-posts',
+      active: authStatus
+    },
+    {
+      name: "Add Posts",
+      slug: '/add-posts',
       active: authStatus
     },
   ]
@@ -56,7 +61,7 @@ function Header() {
 
             {authStatus && (
               <li>
-                <logoutBtn />
+                <LogoutButton />
               </li>
             )}
           </ul>

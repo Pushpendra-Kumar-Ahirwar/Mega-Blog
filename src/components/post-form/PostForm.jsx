@@ -2,16 +2,16 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
-import { Select, Button, Input, RTE } from "../index";
+import { Select, Button, Input, RTE } from "..";
 import { useSelector } from "react-redux";
 
-function PostForm({ post }) {
-    const { register, handleSubmit, control, watch, setValue, getValue } =
+export default function PostForm({ post }) {
+    const { register, handleSubmit, control, watch, setValue, getValues } =
         useForm({
             defaultValues: {
                 title: post?.title || "",
-                slug: post?.slug || "",
-                content: post?.slug || "",
+                slug: post?.$id || "",
+                content: post?.content || "",
                 status: post?.status || "active",
             },
         });
@@ -22,10 +22,10 @@ function PostForm({ post }) {
     const sumbit = async (data) => {
         if (post) {
             const file = data.image[0]
-                ? appwriteService.uploadFile(data.image[0])
+                ? await appwriteService.uploadFile(data.image[0])
                 : null;
             if (file) {
-                appwriteService.deleteFile(featuredImage);
+                appwriteService.deleteFile(post.featuredImage);
             }
 
             const dbPost = await appwriteService.updatePost(post.$id, {
@@ -45,7 +45,7 @@ function PostForm({ post }) {
                     userId: userData.$id,
                 });
                 if (dbPost) {
-                    navigate(`post/${dbPost.$id}`);
+                    navigate(`/post/${dbPost.$id}`);
                 }
             }
         }
@@ -69,9 +69,8 @@ function PostForm({ post }) {
             }
         });
 
-        return () => {
-            subscription.unsubscribe();
-        };
+        return () =>  subscription.unsubscribe();
+        
     }, [watch, setValue, slugTransform]);
 
     return (
@@ -100,7 +99,7 @@ function PostForm({ post }) {
                     label='Content:'
                     name='content'
                     control={control}
-                    defaultValue={getValue("content")}
+                    defaultValue={getValues("content")}
                 />
             </div>
 
@@ -117,12 +116,12 @@ function PostForm({ post }) {
 
                 {post && (
                     <div className="w-full mb-4 ">
-                        <img src={appwriteService.getFilePreview(post.featuredImage)} alt={post.title} />
+                        <img src={appwriteService.getFilePreview(post.featuredImage)} alt={post.title} className="rounded-lg" />
                     </div>
                 )}
 
                 <Select
-                    option={["active", "inactive"]}
+                    options={["active", "inactive"]}
                     label="Status"
                     className="mb-4"
                     {...register('status', {
@@ -137,4 +136,4 @@ function PostForm({ post }) {
         </form>
     );
 }
-export default PostForm;
+
