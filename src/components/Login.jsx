@@ -69,6 +69,7 @@ function Login() {
                         />
                         <Input
                             label="Password"
+                            type="password"
                             placeholder="Enter Your Password"
                             {...register("password", {
                                 required: true,

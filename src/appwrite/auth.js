@@ -1,5 +1,5 @@
 import conf from "../conf/conf";
-import { Client, ID, Account } from "appwrite";
+import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
     client = new Client();
@@ -7,26 +7,27 @@ export class AuthService {
 
     constructor() {
         this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId);
+            .setEndpoint(conf.appwriteUrl) // Ensure this is correct
+            .setProject(conf.appwriteProjectId); // Ensure this is correct
         this.account = new Account(this.client);
     }
 
     async createAccount({ email, password, name }) {
         try {
-            const UserAccount = await this.account.create(
-                ID.unique,
+            const userAccount = await this.account.create(
+                ID.unique(),
                 email,
                 password,
                 name
             );
-            if (UserAccount) {
+            if (userAccount) {
                 return this.login({ email, password });
             } else {
-                return UserAccount;
+                return userAccount;
             }
         } catch (error) {
-            console.log("Authservice: CreateAccount: ", error);
+            console.error("AuthService: CreateAccount:", error);
+            throw error;
         }
     }
 
@@ -34,7 +35,8 @@ export class AuthService {
         try {
             return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
-            console.log("AuthService: Login: ", error);
+            console.error("AuthService: Login:", error);
+            throw error;
         }
     }
 
@@ -42,16 +44,17 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log(`Error in current Session ::`, error);
+            console.error("Error in current session:", error);
+            throw error;
         }
-        return null;
     }
 
     async logout() {
         try {
             await this.account.deleteSessions();
         } catch (error) {
-            console.log("Error in logout", error);
+            console.error("Error in logout:", error);
+            throw error;
         }
     }
 }

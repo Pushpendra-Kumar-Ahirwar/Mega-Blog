@@ -1,8 +1,8 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Logo from "./Logo";
-import logoutBtn from "./Header/logoutBtn";
 import Container from "./container/Container";
+import LogoutButton from "./Header/LogoutButton";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
@@ -12,12 +12,17 @@ import Login from "./Login";
 import AuthLayout from './AuthLayout'
 import PostCard from './PostCard'
 import PostForm from './post-form/PostForm'
+import AllPosts from '../pages/AllPosts'
+import EditPost from '../pages/EditPost'
+import AddPost from '../pages/AddPost'
+import Post from '../pages/Post'
+import Home from '../pages/Home'
 
 export {
     Header,
     Footer,
     Logo,
-    logoutBtn,
+    LogoutButton,
     Container,
     Button,
     Input,
@@ -28,4 +33,9 @@ export {
     AuthLayout,
     PostCard,
     PostForm,
+    AllPosts,
+    EditPost,
+    AddPost,
+    Post,
+    Home,
 };

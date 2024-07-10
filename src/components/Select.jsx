@@ -28,4 +28,4 @@ function Select({
     )
 }
 
-export default React.useRef(Select);
+export default React.forwardRef(Select);
