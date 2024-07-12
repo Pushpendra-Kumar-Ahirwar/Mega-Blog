@@ -9,7 +9,7 @@ import Select from "./Select";
 import RTE from "./RTE";
 import Signup from "./Signup";
 import Login from "./Login";
-import AuthLayout from './AuthLayout'
+import Protected from './AuthLayout'
 import PostCard from './PostCard'
 import PostForm from './post-form/PostForm'
 import AllPosts from '../pages/AllPosts'
@@ -17,6 +17,7 @@ import EditPost from '../pages/EditPost'
 import AddPost from '../pages/AddPost'
 import Post from '../pages/Post'
 import Home from '../pages/Home'
+import Loader from "./Loader";
 
 export {
     Header,
@@ -30,7 +31,7 @@ export {
     RTE,
     Signup,
     Login,
-    AuthLayout,
+    Protected,
     PostCard,
     PostForm,
     AllPosts,
@@ -38,4 +39,5 @@ export {
     AddPost,
     Post,
     Home,
+    Loader
 };

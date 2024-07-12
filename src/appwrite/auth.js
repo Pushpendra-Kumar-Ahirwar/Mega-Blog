@@ -33,10 +33,21 @@ export class AuthService {
 
     async login({ email, password }) {
         try {
-            return await this.account.createEmailPasswordSession(email, password);
+            return await this.account.createEmailPasswordSession(email, password)
         } catch (error) {
             console.error("AuthService: Login:", error);
             throw error;
+        }
+    }
+    async googlelogin() {
+        try {
+            return await this.account.createOAuth2Session(
+                "google",
+                'http://localhost:5173/all-posts',
+                'http://localhost:5173/login'
+            )
+        } catch (err) {
+            console.log("error in google login", err)
         }
     }
 

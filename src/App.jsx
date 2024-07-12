@@ -1,13 +1,12 @@
 import  React, {useEffect, useState } from 'react'
-import './App.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login, logout } from './store/authSlice'
 import authService  from './appwrite/auth'
 import {Header,Footer} from './components/index'
 import { Outlet } from 'react-router-dom'
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,11 +22,11 @@ function App() {
   }, [])
 
   return !loading? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-500'>
+    <div className='w-full flex flex-wrap content-between bg-gray-400'>
       <div className='w-full block'>
         <Header/>
         <main>
-          TODO: <Outlet/>
+         <Outlet/>
         </main>
         <Footer/>
       </div>

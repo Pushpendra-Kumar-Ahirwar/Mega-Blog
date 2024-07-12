@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
@@ -14,7 +14,6 @@ export default function PostForm({ post }) {
             status: post?.status || "active",
         },
     });
-
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
@@ -46,8 +45,8 @@ export default function PostForm({ post }) {
                     navigate(`/post/${dbPost.$id}`);
                 }
             }
-        }
-    };
+        }}
+    
 
     const slugTransform = useCallback((value) => {
         if (value && typeof value === "string")

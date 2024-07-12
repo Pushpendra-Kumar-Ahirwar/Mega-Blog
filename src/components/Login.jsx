@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
-import { Button, Logo, Input } from './index'
+import { Button, Logo, Input, Loader } from './index'
 import { Link, useNavigate } from 'react-router-dom'
 import authService from '../appwrite/auth'
 import { login as authLogin } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
+    const [loading,setLoading]=useState(false)
 
     const login = async (data) => {
         setError('')
+        setLoading(true)
         try {
             const session = await authService.login(data)
             if (session) {
@@ -24,11 +27,22 @@ function Login() {
             }
         } catch (error) {
             setError(error.message)
+        }finally{
+            setLoading(false)
+        }
+    }
+
+    const handlegooglelogin=async()=>{
+        setError('')
+        try {
+            authService.googlelogin();
+        } catch (error) {
+            console.log("Error in google login", error)
         }
     }
 
     return (
-        <div className='flex items-center justify-center w-full '>
+        <div className='flex items-center justify-center w-full mt-8 mb-8 '>
             <div
                 className={`mx-auto w-full max-w-lg bg-gray-100 rounded-lg p-10 border border-black/10`}>
                 <div
@@ -38,7 +52,7 @@ function Login() {
                     </span>
                 </div>
                 <h2 className='text-center text-2xl font-bold leading-tight'>
-                    Sign in to your account
+                    Log in to your account
                 </h2>
                 <p className='mt-2 text-center text-base text-black/60'>
                     Don&apos;t have an account&nbsp;
@@ -58,7 +72,7 @@ function Login() {
                         <Input
                             label="Email"
                             placeholder="Enter your email "
-                            type="email"
+                            type="Email"
                             {...register("email", {
                                 required: true,
                                 validate: {
@@ -75,11 +89,12 @@ function Login() {
                                 required: true,
                             })}
                         />
-                        <Button type='submit' className='w-full'>
-                            Sign In
+                        <Button type='submit' className='w-full' disabled={loading}>
+                            {loading?<Loader/>:"Sign in"}
                         </Button>
                     </div>
                 </form>
+                <Button className='bg-white w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>{<FcGoogle />}</Button>
             </div>
 
         </div>

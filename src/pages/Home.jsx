@@ -16,7 +16,7 @@ const [posts, setPosts] = useState([])
 
     if (posts.length === 0) {   
         return (
-            <div className='w-full py-8 mt-4 text-center'>
+            <div className='py-8 mt-4 text-center p-3'>
                 <Container>
                     <div className='flex flex-wrap'>
                         <div className='p-2 w-full'>
@@ -31,10 +31,10 @@ const [posts, setPosts] = useState([])
     return(
         <div className='w-full py-8 '>
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='flex flex-wrap gap-4'>
                     {posts.map((post)=>(
                         <div key={post.$id} className='py-2 w-1/4'>
-                            <PostCard {...post}/>
+                            <PostCard  {...post} className/>
                         </div>
                     ))}
                 </div>

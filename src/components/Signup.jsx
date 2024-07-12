@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Logo, Input } from './index'
+import { Button, Logo, Input, Loader } from './index'
 import { Link, useNavigate } from 'react-router-dom'
 import authService from '../appwrite/auth'
 import { login } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { FcGoogle } from "react-icons/fc";
 
 
 function Signup() {
@@ -12,18 +13,33 @@ function Signup() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
+    const [loading ,setLoading]=useState(false)
 
     const create = async (data) => {
         setError('')
+        setLoading(true)
         try {
             const userData = await authService.createAccount(data)
             if (userData) {
                 const userData = authService.getCurrentUser()
-                if (userData) dispatch(login(userData))
+                if (userData){ 
+                    setLoading(false)
+                     dispatch(login(userData))}
                 navigate('/')
             }
         } catch (error) {
             console.log(error.message)
+        }finally{
+            setLoading(false)
+        }
+    }
+
+    const handlegooglelogin=async()=>{
+        setError('')
+        try {
+            authService.googlelogin();
+        } catch (error) {
+            console.log("Error in google login", error)
         }
     }
 
@@ -63,7 +79,7 @@ function Signup() {
                             })}
                         />
                         <Input
-                            label="email"
+                            label="Email"
                             placeholder="Enter your email"
                             type="email"
                             {...register("email", {
@@ -75,18 +91,19 @@ function Signup() {
                             })}
                         />
                         <Input
-                            label="password"
+                            label="Password"
                             type="password"
                             placeholder="Enter Your Password"
                             {...register("password", {
                                 required: true
                             })}
                         />
-                        <Button type='submit' className='w-full'>
-                            Create Account
+                        <Button type='submit' className='w-full' disabled={loading}>
+                            {loading?<Loader/>:"Create Account"}
                         </Button>
                     </div>
                 </form>
+                    <Button className='bg-white w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>{<FcGoogle />}</Button>
             </div>
         </div>
     )
