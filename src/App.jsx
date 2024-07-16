@@ -10,6 +10,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    
     authService.getCurrentUser()
       .then((userData) => {
         if (userData) {
@@ -22,7 +23,7 @@ function App() {
   }, [])
 
   return !loading? (
-    <div className='w-full flex flex-wrap content-between bg-gray-400'>
+    <div className='w-full flex flex-wrap content-between bg-gray-300'>
       <div className='w-full block'>
         <Header/>
         <main>

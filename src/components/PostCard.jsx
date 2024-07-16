@@ -10,7 +10,7 @@ function PostCard({
 
     return (
         <Link to={`/post/${$id}`}>
-            <div className='w-full rounded-xl p-4 bg-gray-100'>
+            <div className='w-full rounded-xl p-4 bg-slate-300 hover:border-[2px] hover:border-gray-600 '>
                 <div className='w-full justify-center mb-4'>
                     <img src={appwriteService.getFilePreview(featuredImage)} alt={title} className='rounded-lg' />
                 </div>
