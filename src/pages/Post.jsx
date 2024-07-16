@@ -39,22 +39,16 @@ export default function Post() {
     };
     
     return loading ?(<Loader/>): post? (
-        <div className="py-8 m-5 border-solid border-[3px] border-gray-500">
+        <div className="py-8">
             <Container>
-                <div className="w-[500px] flex justify-center mb-4 relative rounded-xl p-2">
+                <div className="w-full flex justify-center mb-4 relative rounded-xl p-2">
                     <Link to={'/all-posts'}>
-                    <Button bgColor="bg-gray-700" className="text-white m-5 absolute">
+                    <Button bgColor="bg-blue-500" className="text-white m-5 absolute">
                         All Post
                     </Button>
                     </Link>
-                    <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl"
-                    />
-
                     {isAuthor && (
-                        <div className="absolute right-6 top-6">
+                        <div className=" absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
                                 <Button bgColor="bg-green-500" className="mr-3">
                                     Edit
@@ -65,6 +59,12 @@ export default function Post() {
                             </Button>
                         </div>
                     )}
+                    <img
+                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        alt={post.title}
+                        className="rounded-xl bg-slate-100"
+                        
+                    />
 
                 </div>
                 <div className="w-full mb-2">

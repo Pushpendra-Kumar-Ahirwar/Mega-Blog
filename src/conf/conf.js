@@ -9,7 +9,7 @@ const conf = {
         import.meta.env.VITE_APPWRITE_COLLECTION_ID),
     appwriteBucketId: String(
         import.meta.env.VITE_APPWRITE_BUCKET_ID),
-    RTEkey: String(
+    tinyMCE_apiKey: String(
         import.meta.env.VITE_API
     )
 };
