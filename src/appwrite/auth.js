@@ -43,8 +43,8 @@ export class AuthService {
         try {
             return await this.account.createOAuth2Session(
                 "google",
-                'http://localhost:5173/all-posts',
-                'http://localhost:5173/login'
+                'https://mega-blog-woad.vercel.app/all-posts',
+                'hhttps://mega-blog-woad.vercel.app/login'
             )
         } catch (err) {
             console.log("error in google login", err)
