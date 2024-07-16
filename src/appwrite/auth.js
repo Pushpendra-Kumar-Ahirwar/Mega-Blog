@@ -31,6 +31,16 @@ export class AuthService {
         }
     }
 
+    async verification(userId, secret) {
+        try {
+            await this.account.updateVerification(userId, secret);
+            return true;
+        } catch (error) {
+            console.error("Error verifying email:", error);
+            return false;
+        }
+    }
+
     async login({ email, password }) {
         try {
             return await this.account.createEmailPasswordSession(email, password)
@@ -41,7 +51,7 @@ export class AuthService {
     }
     async googlelogin() {
         try {
-            return await this.account.createOAuth2Session(
+            return this.account.createOAuth2Session(
                 "google",
                 'https://mega-blog-woad.vercel.app/all-posts',
                 'https://mega-blog-woad.vercel.app/login'

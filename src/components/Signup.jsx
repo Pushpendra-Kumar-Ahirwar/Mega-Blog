@@ -6,6 +6,7 @@ import { login } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
+import validator from 'validator'
 
 
 function Signup() {
@@ -21,11 +22,11 @@ function Signup() {
         try {
             const userData = await authService.createAccount(data)
             if (userData) {
-                const userData = authService.getCurrentUser()
+                const userData = await authService.getCurrentUser()
                 if (userData){ 
                     setLoading(false)
                      dispatch(login(userData))}
-                navigate('/')
+                navigate('/login')
             }
         } catch (error) {
             console.log(error.message)
@@ -35,10 +36,13 @@ function Signup() {
     }
 
     const handlegooglelogin=async()=>{
-        setError('')
+        setError(false)
+        setLoading(true)
         try {
-            authService.googlelogin();
+           await authService.googlelogin();
+           setLoading(false)
         } catch (error) {
+            setError(true)
             console.log("Error in google login", error)
         }
     }

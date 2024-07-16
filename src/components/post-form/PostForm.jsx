@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues,formState:{errors} } = useForm({
         defaultValues: {
             title: post?.title || "",
             slug: post?.$id || "",
@@ -15,10 +15,13 @@ export default function PostForm({ post }) {
         },
     });
     const navigate = useNavigate();
+    const [loading,setLoading]=useState(false)
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
-        if (post) {
+        setLoading(true)
+        try{
+            if (post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
             if (file) {
@@ -45,7 +48,13 @@ export default function PostForm({ post }) {
                     navigate(`/post/${dbPost.$id}`);
                 }
             }
-        }}
+        }
+    }catch(error){
+        console.error("Error submittion post: ",error)
+    }finally{
+        setLoading(false)
+    }
+};
     
 
     const slugTransform = useCallback((value) => {
@@ -78,6 +87,9 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("title", { required: true })}
                 />
+                {errors.title &&(
+                     <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+                )}
                 <Input
                     label="Slug :"
                     placeholder="Slug"

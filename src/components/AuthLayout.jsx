@@ -10,7 +10,7 @@ export default function Protected({ children, authentication = true }) {
         if (authentication && authStatus !== authentication) {
             navigate('/login')
         } else if (!authentication && authStatus !== authentication) {
-            navigate("/all-posts")
+            navigate("/")
         }
         setLoader(false)
     }, [authStatus, navigate, authentication])

@@ -18,6 +18,7 @@ import AddPost from '../pages/AddPost'
 import Post from '../pages/Post'
 import Home from '../pages/Home'
 import Loader from "./Loader";
+import AuthCallBack from './AuthCallBack'
 
 export {
     Header,
@@ -39,5 +40,6 @@ export {
     AddPost,
     Post,
     Home,
-    Loader
+    Loader,
+    AuthCallBack
 };

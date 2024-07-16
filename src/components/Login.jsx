@@ -34,10 +34,12 @@ function Login() {
 
     const handlegooglelogin=async()=>{
         setError('')
+        setLoading(true)
         try {
-            authService.googlelogin();
+            await authService.googlelogin();
         } catch (error) {
             console.log("Error in google login", error)
+            setLoading(false)
         }
     }
 

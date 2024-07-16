@@ -12,6 +12,7 @@ export default function Post() {
     const navigate = useNavigate();
     
     const userData = useSelector((state) => state.auth.userData);
+    const isAuthor = post && userData ? post.userId === userData.$id : false;
     
     useEffect(() => {
          if (slug) {
@@ -27,7 +28,9 @@ export default function Post() {
 );
     
     const deletePost = () => {
+        setLoading(true)
         appwriteService.deletePost(post.$id).then((status) => {
+            setLoading(false)
             if (status) {
                 appwriteService.deleteFile(post.featuredImage);
                 navigate("/all-posts");
@@ -35,7 +38,6 @@ export default function Post() {
         });
     };
     
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
     return loading ?(<Loader/>): post? (
         <div className="py-8 m-5 border-solid border-[3px] border-gray-500">
             <Container>
