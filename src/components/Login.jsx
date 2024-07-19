@@ -27,7 +27,8 @@ function Login() {
                 const userData = await authService.getAllUser()
                 if (userData){
                     dispatch(authLogin(userData))
-                console.log(userData)};
+                // console.log(userData)
+                };
                 navigate('/')
 
             }
@@ -47,10 +48,10 @@ function Login() {
         setLoading(true)
         try {
             await authService.googlelogin();
-            const userData= await authService.getCurrentUser()
-            if(userData){
-                console.log(userData)
-            }
+            // const userData= await authService.getCurrentUser()
+            // if(userData){
+            //     console.log(userData)
+            // }
         } catch (error) {
             console.log("Error in google login", error)
             setLoading(false)
