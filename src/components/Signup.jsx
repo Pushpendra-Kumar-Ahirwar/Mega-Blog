@@ -101,7 +101,7 @@ function Signup() {
                                 }
                             })}
                         />
-                        <div className=' flex items-end relative justify-between'>
+                        <div className='flex items-center relative'>
                             <Input
                                 label="Password"
                                 type={showpass ? "text" : "password"}
@@ -109,10 +109,10 @@ function Signup() {
                                 {...register("password", {
                                     required: true,
                                 })}
-
+                                className='flex-1'
 
                             />
-                            <button className='text-2xl text-blue-700 absolute left-[370px] sm:left-[400px] bottom-2' onClick={showPassword}>{showpass ? <IoEye /> : <IoMdEyeOff />}</button>
+                            <button className='text-2xl text-blue-700 absolute right-2 bottom-2' onClick={showPassword}>{showpass ? <IoEye /> : <IoMdEyeOff />}</button>
                         </div>
                         <Button type='submit' className='w-full' disabled={loading}>
                             {loading ? <Loader /> : "Create Account"}

@@ -24,8 +24,10 @@ function Login() {
         try {
             const session = await authService.login(data)
             if (session) {
-                const userData = await authService.getCurrentUser()
-                if (userData) dispatch(authLogin(userData));
+                const userData = await authService.getAllUser()
+                if (userData){
+                    dispatch(authLogin(userData))
+                console.log(userData)};
                 navigate('/')
 
             }
@@ -45,6 +47,10 @@ function Login() {
         setLoading(true)
         try {
             await authService.googlelogin();
+            const userData= await authService.getCurrentUser()
+            if(userData){
+                console.log(userData)
+            }
         } catch (error) {
             console.log("Error in google login", error)
             setLoading(false)
@@ -91,7 +97,7 @@ function Login() {
                                 }
                             })}
                         />
-                        <div className=' flex items-end relative justify-between'>
+                        <div className='flex items-center relative'>
                         <Input
                             label="Password"
                             type={showpass? "text":"password"}
@@ -99,10 +105,10 @@ function Login() {
                             {...register("password", {
                                 required: true,
                             })}
-                           
+                           className='flex-1'
                             
                         />
-                        <button className='text-2xl text-blue-700 absolute left-[370px] sm:left-[400px] bottom-2' onClick={showPassword}>{showpass ?<IoEye />:<IoMdEyeOff />}</button>
+                        <button className='text-2xl text-blue-700 absolute right-2 bottom-2' onClick={showPassword}>{showpass ?<IoEye />:<IoMdEyeOff />}</button>
                         </div>
                         <Button type='submit' className='w-full' disabled={loading}>
                             {loading?<Loader/>:"Sign in"}

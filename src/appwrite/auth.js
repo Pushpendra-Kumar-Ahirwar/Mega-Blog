@@ -52,9 +52,12 @@ export class AuthService {
     async googlelogin() {
         try {
             return this.account.createOAuth2Session(
+                // "google",
+                // 'https://mega-blog-woad.vercel.app/all-posts',
+                // 'https://mega-blog-woad.vercel.app/login'
                 "google",
-                'https://mega-blog-woad.vercel.app/all-posts',
-                'https://mega-blog-woad.vercel.app/login'
+                'http://localhost:5173/all-posts',
+                'http://localhost:5173/login'
             )
         } catch (err) {
             console.log("error in google login", err)
@@ -66,6 +69,15 @@ export class AuthService {
             return await this.account.get();
         } catch (error) {
             console.error("Error in current session:", error);
+            throw error;
+        }
+        return null;
+    }
+    async getAllUser() {
+        try {
+            return await this.account.listIdentities();
+        } catch (error) {
+            console.error("Error ALl user fetching session:", error);
             throw error;
         }
         return null;
