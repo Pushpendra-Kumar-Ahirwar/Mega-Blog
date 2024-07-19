@@ -6,7 +6,8 @@ import { login } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
-import validator from 'validator'
+import { IoMdEyeOff } from "react-icons/io";
+import { IoEye } from "react-icons/io5";
 
 
 function Signup() {
@@ -14,7 +15,8 @@ function Signup() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
-    const [loading ,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
+    const [showpass ,setShowpass]=useState(false)
 
     const create = async (data) => {
         setError('')
@@ -23,24 +25,29 @@ function Signup() {
             const userData = await authService.createAccount(data)
             if (userData) {
                 const userData = await authService.getCurrentUser()
-                if (userData){ 
+                if (userData) {
                     setLoading(false)
-                     dispatch(login(userData))}
+                    dispatch(login(userData))
+                }
                 navigate('/login')
             }
         } catch (error) {
             console.log(error.message)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
 
-    const handlegooglelogin=async()=>{
+    const showPassword=()=>{
+        setShowpass(!showpass)
+    }
+
+    const handlegooglelogin = async () => {
         setError(false)
         setLoading(true)
         try {
-           await authService.googlelogin();
-           setLoading(false)
+            await authService.googlelogin();
+            setLoading(false)
         } catch (error) {
             setError(true)
             console.log("Error in google login", error)
@@ -94,20 +101,25 @@ function Signup() {
                                 }
                             })}
                         />
-                        <Input
-                            label="Password"
-                            type="password"
-                            placeholder="Enter Your Password"
-                            {...register("password", {
-                                required: true
-                            })}
-                        />
+                        <div className=' flex items-end relative justify-between'>
+                            <Input
+                                label="Password"
+                                type={showpass ? "text" : "password"}
+                                placeholder="Enter Your Password"
+                                {...register("password", {
+                                    required: true,
+                                })}
+
+
+                            />
+                            <button className='text-2xl text-blue-700 absolute left-[370px] sm:left-[400px] bottom-2' onClick={showPassword}>{showpass ? <IoEye /> : <IoMdEyeOff />}</button>
+                        </div>
                         <Button type='submit' className='w-full' disabled={loading}>
-                            {loading?<Loader/>:"Create Account"}
+                            {loading ? <Loader /> : "Create Account"}
                         </Button>
                     </div>
                 </form>
-                    <Button className='bg-white w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>{<FcGoogle />}</Button>
+                <Button className='bg-white w-full flex justify-center items-center text-3xl mt-3' onClick={handlegooglelogin}>{<FcGoogle />}</Button>
             </div>
         </div>
     )

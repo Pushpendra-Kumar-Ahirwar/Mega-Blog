@@ -6,6 +6,9 @@ import { login as authLogin } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from "react-icons/fc";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoEye } from "react-icons/io5";
+
 
 function Login() {
     const navigate = useNavigate()
@@ -13,6 +16,7 @@ function Login() {
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState('')
     const [loading,setLoading]=useState(false)
+    const [showpass ,setShowpass]=useState(false)
 
     const login = async (data) => {
         setError('')
@@ -30,6 +34,10 @@ function Login() {
         }finally{
             setLoading(false)
         }
+    }
+
+    const showPassword=()=>{
+        setShowpass(!showpass)
     }
 
     const handlegooglelogin=async()=>{
@@ -83,14 +91,19 @@ function Login() {
                                 }
                             })}
                         />
+                        <div className=' flex items-end relative justify-between'>
                         <Input
                             label="Password"
-                            type="password"
+                            type={showpass? "text":"password"}
                             placeholder="Enter Your Password"
                             {...register("password", {
                                 required: true,
                             })}
+                           
+                            
                         />
+                        <button className='text-2xl text-blue-700 absolute left-[370px] sm:left-[400px] bottom-2' onClick={showPassword}>{showpass ?<IoEye />:<IoMdEyeOff />}</button>
+                        </div>
                         <Button type='submit' className='w-full' disabled={loading}>
                             {loading?<Loader/>:"Sign in"}
                         </Button>
