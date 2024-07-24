@@ -33,18 +33,22 @@ function Header() {
       slug: '/add-post',
       active: authStatus
     },
+    {
+      name: "About",
+      slug: '/about',
+      active: authStatus
+    },
   ]
 
   return (
     <header className='py-3 shadow bg-gray-500'>
       <Container>
+        {/* <div className='flex justify-start items-start absolute'>
+              <Logo className='w-16 h-16'/>
+            </div> */}
         <nav className='flex justify-center'>
           <div className='mr-4'>
-            <Link to='/'>
-              <Logo width='70px' />
-            </Link>
           </div>
-
           <ul className='flex flex-wrap mt-auto justify-evenly items-center'>
             {navItems.map((item) =>
               item.active ? (

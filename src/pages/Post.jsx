@@ -38,7 +38,7 @@ export default function Post() {
         });
     };
     
-    return loading ?(<Loader/>): post? (
+    return loading ?(<Loader className='mt-4 mb-4'/>): post? (
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative rounded-xl p-2">

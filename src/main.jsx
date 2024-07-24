@@ -13,6 +13,7 @@ import Home from './pages/Home.jsx'
 import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import AddPost from './pages/AddPost.jsx'
+import About from './components/About.jsx'
 
 
 const router = createBrowserRouter(
@@ -54,6 +55,7 @@ const router = createBrowserRouter(
     <Route path='/post/:slug' element={<Post/>} />
     {/* <Route path='/verify' element={<EmailVerification />} /> */}
     <Route path='/auth-callback' element={<AuthCallBack />} />
+    <Route path='/about' element={<About />} />
   </Route>
 
 ))

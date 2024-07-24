@@ -52,12 +52,26 @@ export class AuthService {
     async googlelogin() {
         try {
             return this.account.createOAuth2Session(
-                "google",
-                'https://mega-blog-woad.vercel.app/all-posts',
-                'https://mega-blog-woad.vercel.app/login'
                 // "google",
-                // 'http://localhost:5173/all-posts',
-                // 'http://localhost:5173/login'
+                // 'https://mega-blog-woad.vercel.app/all-posts',
+                // 'https://mega-blog-woad.vercel.app/login'
+                "google",
+                'http://localhost:5173/all-posts',
+                'http://localhost:5173/login'
+            )
+        } catch (err) {
+            console.log("error in google login", err)
+        }
+    }
+    async githublogin() {
+        try {
+            return this.account.createOAuth2Session(
+                // "google",
+                // 'https://mega-blog-woad.vercel.app/all-posts',
+                // 'https://mega-blog-woad.vercel.app/login'
+                "github",
+                'http://localhost:5173/all-posts',
+                'http://localhost:5173/login'
             )
         } catch (err) {
             console.log("error in google login", err)
