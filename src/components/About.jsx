@@ -4,6 +4,7 @@ import Mycv from '../assets/My-CV.pdf'
 import { Link } from 'react-router-dom';
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
+import hand from '../assets/hand.gif'
 
 export default class About extends Component {
   render() {
@@ -11,11 +12,28 @@ export default class About extends Component {
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <div className="w-full max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
           <div className="flex flex-col md:flex-row items-center md:items-start">
-            <div className="w-32 h-32 md:w-48 md:h-48 flex-shrink-0">
-              <img src={myPhoto} alt="" className='transition-all transtion-300 hover:scale-105' />
+            <div className="w-64 h-60 md:w-80 md:h-60 flex-shrink-0">
+              <img src={myPhoto} alt="" className='transition-all transtion-300 hover:scale-105 rounded-lg' />
+              <div className="flex justify-center mt-3 space-x-2">
+            <Link to={'https://github.com/Pushpendra-Kumar-Ahirwar/Pushpendra-Kumar-Ahirwar'}>
+            <button className="px-4 py-2 bg-black/80 text-white rounded-lg hover:bg-gray-600 transition-all transition-200 hover:scale-110">
+            <FaGithub />
+            </button>
+            </Link>
+            <Link to={'https://www.linkedin.com/in/pushpendra-kumar-ahirwar-8b25a5281/s'}>
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-900 duration-300 transition-all transition-200 hover:scale-110">
+            <FaLinkedin />
+            </button>
+            </Link>
+          </div>
             </div>
             <div className="mt-4 md:mt-0 md:ml-6">
-              <p className="text-lg text-gray-600">Hello There</p>
+              <div className='flex justify-start items-center mt-10 md:mt-0'>
+              <p className=" font-bold text-2xl text-gray-600">Hello There 
+                </p>
+                <img src={hand} className='w-14 h-14' alt="" />
+
+              </div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mt-2">
                 I'm Pushpendra Kumar Ahirwar
               </h2>
@@ -29,19 +47,7 @@ export default class About extends Component {
               </a>
             </div>
           </div>
-          <div className="flex justify-center mt-6 space-x-4">
-          <h1 className="text-xl font-medium text-gray-800">Connect with me</h1>
-            <Link to={'https://github.com/Pushpendra-Kumar-Ahirwar/Pushpendra-Kumar-Ahirwar'}>
-            <button className="px-4 py-2 bg-black/80 text-white rounded-lg hover:bg-gray-600 transition-all transition-200 hover:scale-110">
-            <FaGithub />
-            </button>
-            </Link>
-            <Link to={'https://www.linkedin.com/in/pushpendra-kumar-ahirwar-8b25a5281/s'}>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-900 duration-300 transition-all transition-200 hover:scale-110">
-            <FaLinkedin />
-            </button>
-            </Link>
-          </div>
+          
         </div>
       </div>
     );
