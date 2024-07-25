@@ -63,6 +63,8 @@ function Login() {
             await authService.githublogin();
         } catch (error) {
             console.log("Error in google login", error)
+           
+        }finally{
             setLoading(false)
         }
     }
