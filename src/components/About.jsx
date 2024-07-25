@@ -9,7 +9,7 @@ import hand from '../assets/hand.gif'
 export default class About extends Component {
   render() {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 hover:shadow-xl">
         <div className="w-full max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
           <div className="flex flex-col md:flex-row items-center md:items-start">
             <div className="w-64 h-60 md:w-80 md:h-60 flex-shrink-0">

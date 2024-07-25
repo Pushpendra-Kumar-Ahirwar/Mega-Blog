@@ -40,6 +40,7 @@ function Header() {
     {
       name: "About",
       slug: '/about',
+      active:true
     },
   ]
 
