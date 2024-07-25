@@ -5,7 +5,7 @@ import { Button, Input, Loader, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toast, Zoom } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function PostForm({ post }) {
@@ -46,6 +46,8 @@ export default function PostForm({ post }) {
                     const fileId = file.$id;
                     data.featuredImage = fileId;
                     const dbPost = appwriteService.createPost({ ...data, userId: userData.$id });
+                    
+
                     if (dbPost) {
                         navigate(`/post/${dbPost.$id}`);
                     }
@@ -85,7 +87,6 @@ export default function PostForm({ post }) {
             position: "top-left",
             theme: "dark",
             autoClose: 2000,
-           
         });
     };
 
@@ -97,10 +98,6 @@ export default function PostForm({ post }) {
         if (!data.content) {
             notifyError("Content is required!");
             return;
-        }
-        if (!data.slug) {
-            notifyError("Slug is required!")
-            return
         }
         if (!post && (!data.image || data.image.length === 0)) {
             notifyError("Image is required!");
@@ -115,14 +112,14 @@ export default function PostForm({ post }) {
                     label="Title :"
                     placeholder="Title"
                     className="mb-4"
-                    {...register("title", {required:false})}
+                    {...register("title", { })}
                 />
 
                 <Input
                     label="Slug :"
                     placeholder="Slug"
                     className="mb-4"
-                    {...register("slug", { required: false })}
+                    {...register("slug", { required: true })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
@@ -131,11 +128,11 @@ export default function PostForm({ post }) {
             </div>
             <div className="w-1/3 px-2">
                 <Input
-                    label="Poster-Image :"
+                    label="Featured Image :"
                     type="file"
                     className="mb-4"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: false })}
+                    {...register("image", { required: !post})}
                 />
                 {post && (
                     <div className="w-full mb-4">

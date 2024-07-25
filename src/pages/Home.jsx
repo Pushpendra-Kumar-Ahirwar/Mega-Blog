@@ -4,6 +4,8 @@ import { Container, PostCard } from '../components'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FaArrowRightLong } from "react-icons/fa6";
+import authService from '../appwrite/auth'
+
 
 
 function Home() {
@@ -11,25 +13,18 @@ function Home() {
     const authStatus = useSelector((state) => state.auth.status)
 
     useEffect(() => {
+        
+        console.log(authService.getCurrentUser());
         appwriteService.getPosts().then((posts) => {
             if (posts) {
+               
                 setPosts(posts.documents)
             }
         })
     }, [])
+   
 
     if (posts.length === 0) {
-        // return (
-        //     <div className='py-8 mt-4 text-center p-3'>
-        //         <Container>
-        //             <div className='flex flex-wrap'>
-        //                 <div className='p-2 w-full'>
-        //                     <h1 className='text-2xl font-bold hover:text-gray-500'>Login to read Post</h1>
-        //                 </div>
-        //             </div>
-        //         </Container>
-        //     </div>
-        // )
         return (
             <div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 via-gray-200 to-gray-600 text-gray-800'>
                 <Container className='p-4'>

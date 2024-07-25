@@ -14,6 +14,9 @@ import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import AddPost from './pages/AddPost.jsx'
 import About from './components/About.jsx'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const router = createBrowserRouter(
@@ -64,6 +67,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
     <RouterProvider router={router}/>
+    <ToastContainer/>
     </Provider>
   </React.StrictMode>,
 )
