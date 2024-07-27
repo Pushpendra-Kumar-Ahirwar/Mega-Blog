@@ -52,6 +52,10 @@ export default function PostForm({ post }) {
                 }
             }
         } catch (error) {
+            toast.error("Error in submitting",{
+                position:"top-left",
+                autoClose:2000
+            })
             console.error("Error submittion post: ", error)
         } finally {
             setLoading(false)
@@ -107,6 +111,10 @@ export default function PostForm({ post }) {
             return;
         }
         submit(data);
+            toast.success("Post Sucsesfully",{
+                position:"top-left",
+                autoClose:2000
+            })
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap">

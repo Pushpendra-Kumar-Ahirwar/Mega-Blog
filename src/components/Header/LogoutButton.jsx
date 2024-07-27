@@ -4,6 +4,7 @@ import {logout} from '../../store/authSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../Loader'
+import { toast } from 'react-toastify'
 
 
 function LogoutButton() {
@@ -15,6 +16,10 @@ function LogoutButton() {
       setLoading(true)
         authService.logout().then(()=>{
             dispatch(logout())
+            toast.success("Logout successfully",{
+              position:"top-left",
+              autoClose:2000
+          })
             navigate('/login')
             setLoading(false)
 

@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
+import { toast } from 'react-toastify'
 
 
 function Login() {
@@ -28,7 +29,10 @@ function Login() {
                 const userData = await authService.getCurrentUser()
                 if (userData) {
                     dispatch(authLogin(userData))
-                    // console.log(userData)
+                    toast.success("Login Sucsesfully",{
+                        position:"top-left",
+                        autoClose:2000
+                    })
                 };
                 navigate('/')
 
@@ -47,25 +51,30 @@ function Login() {
 
     const handlegooglelogin = async () => {
         setError('')
-        setLoading(true)
         try {
             await authService.googlelogin();
         } catch (error) {
             console.log("Error in google login", error)
-            setLoading(false)
+        }finally{
+            toast.success("Login Sucsesfully",{
+                position:"top-left",
+                autoClose:2000
+            })
         }
     }
 
     const handlegithublogin = async () => {
         setError('')
-        setLoading(true)
         try {
             await authService.githublogin();
         } catch (error) {
             console.log("Error in google login", error)
            
         }finally{
-            setLoading(false)
+            toast.success("Login successfully",{
+                position:"top-left",
+                autoClose:2000
+            })
         }
     }
 

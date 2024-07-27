@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/config";
 import { Button, Container, Loader } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -37,6 +38,10 @@ export default function Post() {
             setLoading(false)
             if (status) {
                 appwriteService.deleteFile(post.featuredImage);
+                toast.success("Deleted successfully",{
+                    position:"top-left",
+                    autoClose:2000
+                })
                 navigate("/all-posts");
             }
         });

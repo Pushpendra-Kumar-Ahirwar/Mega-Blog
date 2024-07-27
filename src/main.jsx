@@ -69,5 +69,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router}/>
     <ToastContainer/>
     </Provider>
-  </React.StrictMode>,
+   </React.StrictMode>,
 )
