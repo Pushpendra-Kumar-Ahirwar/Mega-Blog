@@ -89,7 +89,7 @@ To run this project locally, follow these steps:
 
 ### Post Page
 
-![Add Post Page](public/post.png)
+![Post](public/Post.png)
 
 ### About Page
 
