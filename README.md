@@ -8,12 +8,12 @@ You can try out the live version of Mega Blog here: [Live Demo](https://mega-blo
 
 ## Features
 
-- **User Authentication**: Sign up and log in with email and password, or use Google and GitHub authentication.
-- **Create, Read, Update, Delete (CRUD) Operations**: Users can add, edit, and delete their own blog posts.
-- **Responsive Design**: Fully responsive layout using Tailwind CSS.
-- **Rich Text Editor**: Includes TinyMCE editor for creating and editing posts.
-- **React Toast Library**: Provides notifications for user actions and feedback.
-- **Secure Password Handling**: Passwords are hashed before storage.
+- [x] **User Authentication**: Sign up and log in with email and password, or use Google and GitHub authentication.
+- [x] **Create, Read, Update, Delete (CRUD) Operations**: Users can add, edit, and delete their own blog posts.
+- [x] **Responsive Design**: Fully responsive layout using Tailwind CSS.
+- [x] **Rich Text Editor**: Includes TinyMCE editor for creating and editing posts.
+- [x] **React Toast Library**: Provides notifications for user actions and feedback.
+- [x] **Secure Password Handling**: Passwords are hashed before storage.
 
 ## Technologies Used
 
@@ -42,7 +42,7 @@ To run this project locally, follow these steps:
 
 3. Set up environment variables:
 
-    Create a `.env` file in the root of the project and add your Appwrite credentials, Google and GitHub client IDs, and other environment variables:
+    Create a `.env` file in the root of the project and add your Appwrite credentials, and other environment variables:
 
     ```env
     REACT_APP_APPWRITE_ENDPOINT=https://appwrite.io/v1
@@ -56,7 +56,7 @@ To run this project locally, follow these steps:
 4. Start the development server:
 
     ```bash
-    npm start
+    npm run dev
     ```
 
     The application will open in your default browser at `http://localhost:3000`.
@@ -95,31 +95,7 @@ To run this project locally, follow these steps:
 
 ![All Posts Page](public/About.png)
 
-## Usage
-
-### Adding a Post
-
-1. Log in to your account.
-2. Navigate to the "Add Post" page.
-3. Enter the title and content using the TinyMCE editor.
-4. Click "Submit" to add your post.
-
-### Editing a Post
-
-1. Log in to your account.
-2. Navigate to the post you want to edit.
-3. Click the "Edit" button.
-4. Make your changes using the TinyMCE editor.
-5. Click "Save" to update your post.
-
-### Deleting a Post
-
-1. Log in to your account.
-2. Navigate to the post you want to delete.
-3. Click the "Delete" button.
-4. Confirm the deletion.
-
-### Notifications
+### Flash Messages
 
 The app uses the React Toastify library to provide notifications for user actions such as successful post creation, updates, and deletions. Notifications help users understand the result of their actions.
 
@@ -147,14 +123,6 @@ To deploy the application to Vercel:
 
     Follow the prompts to configure your deployment. The app will be deployed to Vercel and accessible at your chosen domain.
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-For any inquiries or feedback, please contact Pushpendra Kumar Ahirwar at [rajpushpendra19@gmail.com].
+- 📫 How to reach me **rajpushpendra19@gmail.com**
