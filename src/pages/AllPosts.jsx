@@ -20,7 +20,7 @@ function AllPosts() {
                 <div className='flex flex-wrap justify-center items-center'>
                     {loading?(<Loader/>):(
                     posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className=' w-full md:p-2 md:w-1/4'>
                             <PostCard {...post} />
                         </div>
                     )
